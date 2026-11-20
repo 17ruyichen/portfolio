@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>量化分析系统 — 陈如意</title>
+  <meta name="description" content="从 Baostock 数据、六因子与随机森林，到回测、链上存证与 Streamlit 界面。">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <a class="skip" href="#main">跳到正文</a>
+  <header class="site-header">
+    <div class="inner">
+      <a class="brand" href="../index.html">陈如意 <span>/ Ruyi Chen</span></a>
+      <nav class="nav" aria-label="主导航">
+        <a href="../index.html#work">Work</a>
+        <a href="../index.html#method">Method</a>
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#contact">Contact</a>
+        <a class="cv" href="../assets/cv/chen-ruyi-cv.pdf" target="_blank" rel="noopener">CV</a>
+        <a class="cv" href="../code.html">Code</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="wrap detail-hero">
+      <a class="back" href="../index.html#work">← 返回项目</a>
+      <span class="label">Course project · 2025</span>
+      <h1>量化分析系统</h1>
+      <p class="sub">A Quant Research Workbench</p>
+      <p class="claim">策略写完不算完，我把它做成了一个能跑、能查、能验证的系统。</p>
+    </section>
+
+    <div class="wrap detail-layout">
+      <aside class="aside">
+        <div class="aside-item"><span class="label">角色</span><p>个人项目<br>金融量化分析课程</p></div>
+        <div class="aside-item"><span class="label">期间</span><p>2025</p></div>
+        <div class="aside-item"><span class="label">数据</span><p>Baostock · 5 只 A 股<br>3 年日频</p></div>
+        <div class="aside-item"><span class="label">工具</span><p>Python · Streamlit<br>scikit-learn · Solidity</p></div>
+        <div class="aside-item"><span class="label">代码</span><p>可应要求提供</p></div>
+      </aside>
+
+      <div class="body">
+        <section>
+          <h2><span>01 / Question</span>一个策略从数据到界面，最少需要哪几个模块？</h2>
+          <p>大部分课程项目停在“回测跑通”。我想再往前一步：数据有没有质量报告？策略文件能不能被验证？一个不看代码的人，能不能在界面上自己点一遍？</p>
+          <p>所以这个系统有四个模块：数据、策略、存证、界面。它们不是四个作业拼在一起，而是一条完整的链路。</p>
+        </section>
+
+        <section>
+          <h2><span>02 / Data</span>从公开数据接口开始</h2>
+          <p>用 Baostock 取 5 只 A 股 3 年的日频数据，计算 MA、RSI、MACD 三类技术指标；对缺失值做前向填充与线性插值，对异常值做 IQR 与范围限制；最后生成一份数据质量报告，记录完整性、异常值比例与每只股票的清洗结果。</p>
+          <p>因子部分使用六个维度：市值、反转、估值、换手率、动量、波动率。每个因子做横截面标准化，再用随机森林预测下月收益，按预测值排序。</p>
+        </section>
+
+        <section>
+          <h2><span>03 / Method</span>四个模块，一条链路</h2>
+          <ol class="flow">
+            <li><span>01 / Data</span><b>数据</b><p>Baostock 取数、技术指标、清洗、质量报告。</p></li>
+            <li><span>02 / Strategy</span><b>策略</b><p>六因子标准化、随机森林、月度调仓回测。</p></li>
+            <li><span>03 / Evidence</span><b>存证</b><p>策略文件哈希上链，链上比对验证一致性。</p></li>
+            <li><span>04 / Interface</span><b>界面</b><p>Streamlit 三标签页，把三个模块合成一个入口。</p></li>
+          </ol>
+          <p>存证模块用本地以太坊私链和 Solidity 智能合约：把策略报告、CSV 与图片打包，计算元数据哈希，写入链上；再提取年化、回撤、夏普、卡玛四个关键指标单独上链。验证时重新计算本地哈希，与链上记录比对。</p>
+          <p>这一部分的意义不是“区块链很酷”，而是回答一个很实际的问题：如果回测报告可以被随手改动，面试官凭什么相信它？</p>
+        </section>
+
+        <section>
+          <h2><span>04 / Result</span>8 个文件上链，一套可点开的界面</h2>
+          <table class="metric-table">
+            <thead>
+              <tr><th>指标</th><th class="num">值</th><th>说明</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>年化收益</td><td class="num">13.23%</td><td>系统内参数，月度调仓</td></tr>
+              <tr><td>最大回撤</td><td class="num">−11.73%</td><td>同一区间</td></tr>
+              <tr><td>夏普比率</td><td class="num">0.6146</td><td>系统内计算</td></tr>
+              <tr><td>卡玛比率</td><td class="num">1.1285</td><td>年化 / 最大回撤</td></tr>
+              <tr><td>上链文件</td><td class="num">8</td><td>报告、CSV、PNG</td></tr>
+              <tr><td>区块高度</td><td class="num">#3844</td><td>本地私链</td></tr>
+            </tbody>
+          </table>
+          <p>这个 13.23% 与 01 号多因子策略不是同一套组合：样本只有 5 只股票，因子是课程给定的六个，随机森林只用于排序。它证明的是工程完整度，不是研究深度。</p>
+
+          <figure class="figure shot">
+            <img src="../assets/img/02-platform.png" alt="量化分析系统界面：策略信息、绩效指标与区块链存证状态">
+            <figcaption>系统首页：策略信息、绩效指标、链上状态。策略哈希、区块高度与链 ID 都在界面上可查。</figcaption>
+          </figure>
+
+          <figure class="figure">
+            <img src="../assets/img/02-quality.png" alt="数据质量报告界面：完整性、异常值比例与清洗结果">
+            <figcaption>数据质量报告：完整性、异常值比例、清洗前后对比。它是我后来做 01 号项目时最想补上的一环。</figcaption>
+          </figure>
+        </section>
+
+        <section>
+          <h2><span>05 / Limitation</span>它是一个工作台，不是一个生产系统</h2>
+          <ul>
+            <li>样本只有 5 只股票，不足以支撑任何统计结论。</li>
+            <li>六个因子由课程给定，不是我挖出来的；随机森林只用于排序，不是完整的 alpha 模型。</li>
+            <li>链是本地私链，存证解决的是“文件一致性”，不是“策略有效性”。</li>
+            <li>没有实盘、没有交易接口、没有风控约束。</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2><span>06 / Next</span>如果再做一次</h2>
+          <ul>
+            <li>把股票池扩到全市场，做因子正交化与行业中性。</li>
+            <li>把回测信号与实盘信号分开，避免同一套代码既当裁判又当运动员。</li>
+            <li>把存证从本地私链换到测试网，让外部可以独立验证。</li>
+            <li>补交易成本、容量分析与纸面交易。</li>
+          </ul>
+        </section>
+
+        <div class="next-project">
+          <span class="label">Next project</span>
+          <a href="03-paper.html"><span>绿色技术创新与区域碳排放</span><span class="arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="inner">
+      <span>陈如意 / Ruyi Chen</span>
+      <span>Last updated 2026.11</span>
+      <span>Hong Kong · Shenzhen · Guangzhou</span>
+    </div>
+  </footer>
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

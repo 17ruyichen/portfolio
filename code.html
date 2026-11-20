@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>代码与数据 — 陈如意</title>
+  <meta name="description" content="代码与数据访问说明：公开片段、面试申请与不公开信息。">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <a class="skip" href="#main">跳到正文</a>
+  <header class="site-header">
+    <div class="inner">
+      <a class="brand" href="index.html">陈如意 <span>/ Ruyi Chen</span></a>
+      <nav class="nav" aria-label="主导航">
+        <a href="index.html#work">Work</a>
+        <a href="index.html#method">Method</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#contact">Contact</a>
+        <a class="cv" href="assets/cv/chen-ruyi-cv.pdf" target="_blank" rel="noopener">CV</a>
+        <a class="cv" href="code.html">Code</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="wrap code-hero">
+      <a class="back" href="index.html#work">← 返回项目</a>
+      <span class="label">Code &amp; Data</span>
+      <h1>代码与数据</h1>
+      <p>完整代码包含课程数据、本地路径和个人信息，不在公开页面展示。如果你在面试或合作中需要查看，可以写信申请。我会在 24 小时内回复一个私有仓库链接。</p>
+      <p style="margin-top:24px;">
+        <a class="btn" href="mailto:chen_ruyi17@163.com?subject=Code%20access%20request">申请访问</a>
+      </p>
+    </section>
+
+    <section class="wrap">
+      <div class="access-grid">
+        <div class="access-col">
+          <span class="label">Public</span>
+          <h2>公开</h2>
+          <ul>
+            <li>因子打分与回测核心片段（脱敏）</li>
+            <li>数据质量报告模板</li>
+            <li>项目方法说明与图表</li>
+            <li>论文摘要与“我负责的部分”</li>
+          </ul>
+        </div>
+        <div class="access-col">
+          <span class="label">On request</span>
+          <h2>应要求提供</h2>
+          <ul>
+            <li>完整代码与运行说明</li>
+            <li>数据字典与清洗规则</li>
+            <li>论文全文（需合作者同意）</li>
+            <li>面试用的 3 分钟口述版</li>
+          </ul>
+        </div>
+        <div class="access-col never">
+          <span class="label">Never public</span>
+          <h2>不公开</h2>
+          <ul>
+            <li>原始数据文件</li>
+            <li>代码与数据文件中的个人信息</li>
+            <li>队友姓名与个人信息</li>
+            <li>含本地路径的 notebook 输出</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap" style="padding-bottom:96px;">
+      <h2 style="font-family:var(--serif);font-weight:600;font-size:1.7rem;border-top:1px solid var(--ink);padding-top:18px;margin:0 0 8px;">可公开的片段</h2>
+      <p style="font-size:14px;color:var(--muted);max-width:40em;margin:0 0 8px;">下面是 01 号项目的因子打分核心，去掉路径、姓名与参数文件。完整实现与数据说明在私有仓库里。</p>
+      <pre class="code"><span class="c"># percentile ranks within each month, eligible names only</span>
+df[<span class="k">"s_value"</span>]   = g[<span class="k">"PE"</span>].rank(pct=<span class="k">True</span>, ascending=<span class="k">False</span>)
+df[<span class="k">"s_growth"</span>]  = g[<span class="k">"Niapcrt"</span>].rank(pct=<span class="k">True</span>, ascending=<span class="k">True</span>)
+df[<span class="k">"s_quality"</span>] = g[<span class="k">"Lbrt"</span>].rank(pct=<span class="k">True</span>, ascending=<span class="k">False</span>)
+df[<span class="k">"score"</span>] = <span class="k">0.4</span>*s_value + <span class="k">0.4</span>*s_growth + <span class="k">0.2</span>*s_quality</pre>
+      <p style="font-size:13px;color:var(--muted);max-width:40em;">如果你只想要一段可以带走的代码，这四行就够了；如果你想要能复现全部结果的版本，写信给我。</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="inner">
+      <span>陈如意 / Ruyi Chen</span>
+      <span>Last updated 2026.11</span>
+      <span>Hong Kong · Shenzhen · Guangzhou</span>
+    </div>
+  </footer>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

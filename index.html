@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>陈如意 Ruyi Chen — 量化研究 / 金融科技</title>
+  <meta name="description" content="香港城市大学金融工程硕士。多因子策略、空间计量、机器学习风控。作品集、项目说明与简历。">
+  <meta property="og:title" content="陈如意 Ruyi Chen — 从柜台到模型">
+  <meta property="og:description" content="量化研究 / 金融科技 / 数据分析 · 2027 届">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/img/01-cumulative.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <a class="skip" href="#main">跳到正文</a>
+
+  <header class="site-header">
+    <div class="inner">
+      <a class="brand" href="index.html">陈如意 <span>/ Ruyi Chen</span></a>
+      <nav class="nav" aria-label="主导航">
+        <a href="#work" data-section="work">Work</a>
+        <a href="#method" data-section="method">Method</a>
+        <a href="#about" data-section="about">About</a>
+        <a href="#contact" data-section="contact">Contact</a>
+        <a class="cv" href="assets/cv/chen-ruyi-cv.pdf" target="_blank" rel="noopener">CV</a>
+        <a class="cv" href="code.html">Code</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ================================================== hero -->
+    <section class="wrap hero">
+      <div class="hero-main">
+        <p class="eyebrow">Portfolio · 2027</p>
+        <h1>从柜台<br>到模型。</h1>
+        <p class="lede">
+          我服务过约 400 位真实客户，也在千万级数据和 30 个省份的面板上建过模型。
+        </p>
+        <div class="hero-actions">
+          <a class="btn" href="#work">查看项目</a>
+          <a class="link-arrow" href="assets/cv/chen-ruyi-cv.pdf" target="_blank" rel="noopener">下载 CV <span>↗</span></a>
+          <a class="link-arrow" href="mailto:chen_ruyi17@163.com">写邮件 <span>↗</span></a>
+          <a class="link-arrow" href="code.html">代码与数据 <span>↗</span></a>
+        </div>
+      </div>
+
+      <aside class="hero-meta" aria-label="个人信息">
+        <div>
+          <span class="meta-label">当前</span>
+          <p>香港城市大学<br>金融工程硕士</p>
+        </div>
+        <div>
+          <span class="meta-label">证书</span>
+          <p>FRM Level I<br>CFA Candidate</p>
+        </div>
+        <div>
+          <span class="meta-label">方向</span>
+          <p>量化研究 / 金融科技<br>数据分析</p>
+        </div>
+        <div>
+          <span class="meta-label">地点</span>
+          <p>香港 · 深圳 · 广州</p>
+        </div>
+      </aside>
+
+      <div class="hero-foot" aria-hidden="true">
+        <span>01 — Selected Work</span>
+        <span class="line"></span>
+        <span>Scroll</span>
+      </div>
+    </section>
+
+    <!-- ================================================== work -->
+    <section id="work" class="section">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="section-no">01</span>
+          <h2>Selected Work</h2>
+          <p class="intro">
+            六个项目，来自课程、实习、竞赛和一篇合作论文。每个项目都写了局限——因为知道一个模型哪里不行，比它跑出多高的收益更重要。
+          </p>
+        </div>
+
+        <div class="work-grid">
+          <!-- 01 -->
+          <a class="project p01 reveal" href="work/01-multifactor.html">
+            <figure>
+              <img src="assets/img/01-cumulative.png" alt="多因子策略与全市场等权基准的累计净值曲线，2005–2024">
+            </figure>
+            <div class="card-body">
+              <span class="label">Course project · 2025</span>
+              <h3>多因子量化策略</h3>
+              <p class="claim">我把“买便宜的好公司”拆成了三个可以排序的因子。</p>
+              <p class="desc">
+                2005–2024 年 A 股月频数据。按板块做 PE 横截面分位，叠加归母净利润增长率与总负债增长率，40/40/20 加权；每月选全市场前 10%，计入佣金、印花税与滑点。全样本 vs 市值加权 +3.25%；2019–2024 vs 等权 -0.90%。
+              </p>
+              <ul class="metrics">
+                <li><strong>8.06%</strong><em>年化（净）</em></li>
+                <li><strong>0.022</strong><em>IC · t=3.01</em></li>
+                <li><strong>19.9%</strong><em>月换手</em></li>
+              </ul>
+              <p class="limit"><b>局限</b>价格用前复权、EPS 用名义值，PE 水平可能有偏；行业只能用板块代替。</p>
+              <span class="read">读完整项目 →</span>
+            </div>
+          </a>
+
+          <!-- 02 -->
+          <a class="project p02 reveal" href="work/02-system.html">
+            <figure>
+              <img src="assets/img/02-platform-card.png" alt="量化分析系统的策略信息与绩效指标界面">
+            </figure>
+            <div class="card-body">
+              <span class="label">Course project · 2025</span>
+              <h3>量化分析系统</h3>
+              <p class="claim">策略写完不算完，我把它做成了一个能跑、能查、能验证的系统。</p>
+              <p class="desc">
+                Baostock 取数 → 技术指标 → 数据质量报告；六个因子 + 随机森林 → 月度回测；策略文件哈希上链；三个模块集成进 Streamlit。
+              </p>
+              <ul class="metrics">
+                <li><strong>8</strong><em>文件上链</em></li>
+                <li><strong>13.23%</strong><em>年化</em></li>
+                <li><strong>0.61</strong><em>夏普</em></li>
+              </ul>
+              <p class="limit"><b>局限</b>因子由课程给定；样本只有 5 只股票；随机森林只用于排序。</p>
+              <span class="read">读完整项目 →</span>
+            </div>
+          </a>
+
+          <!-- 03 -->
+          <a class="project p03 reveal" href="work/03-paper.html">
+            <figure>
+              <img src="assets/img/03-map.png" alt="中国各省碳排放强度的空间分布图">
+            </figure>
+            <div class="card-body">
+              <span class="label">Research · 2025</span>
+              <h3>绿色技术创新与区域碳排放</h3>
+              <p class="claim">我负责的那部分，让我第一次遇到“结果不听话”。</p>
+              <p class="desc">
+                30 个省份 2017–2021 面板。DEA-Malmquist 测算 TFP；Moran's I；SAR/SEM；中介效应；分东中西。我负责数据、空间权重矩阵与模型估计。
+              </p>
+              <ul class="metrics">
+                <li><strong>30</strong><em>省份</em></li>
+                <li><strong>5</strong><em>年</em></li>
+                <li><strong>第二作者</strong><em>5 人合作</em></li>
+              </ul>
+              <p class="limit"><b>局限</b>空间项本身不显著，“空间溢出”没有得到稳健支持；TFP 中介在 10% 水平。</p>
+              <span class="read">读完整项目 →</span>
+            </div>
+          </a>
+
+          <!-- 04 -->
+          <a class="project p04 reveal" href="work/04-suilekang.html">
+            <figure>
+              <img src="assets/img/04-revenue.png" alt="穗乐康 2026 年收入结构预测：管理咨询与数据分析占比最高">
+            </figure>
+            <div class="card-body">
+              <span class="label">Competition · 2023–24</span>
+              <h3>穗乐康 · 乡村 IP 打造平台</h3>
+              <p class="claim">我把一个乡村 IP 的想法，做成了一份投资人能读的三年财务模型。</p>
+              <p class="desc">
+                10 人团队负责人。双收益模式与 7 条收入线；500 万注册资本股权、分红与再融资；三年三表与退出机制。
+              </p>
+              <ul class="metrics">
+                <li><strong>5,632 万</strong><em>三年收入预测</em></li>
+                <li><strong>189.2%</strong><em>ROI</em></li>
+                <li><strong>&lt;2 年</strong><em>回收期</em></li>
+              </ul>
+              <p class="limit"><b>局限</b>收入是预测，且主要来自管理咨询与数据分析，不是 IP 授权；三表之间存在口径差异。</p>
+              <span class="read">读完整项目 →</span>
+            </div>
+          </a>
+
+          <!-- 05 -->
+          <a class="project p05 reveal" href="work/05-trs.html">
+            <figure>
+              <img src="assets/img/05-hourly.png" alt="双十二当天浏览、加购、收藏、购买行为的逐小时变化">
+            </figure>
+            <div class="card-body">
+              <span class="label">Internship · 2025</span>
+              <h3>拓尔思 · 数据分析实习</h3>
+              <p class="claim">我在百万级真实数据上做过完整的数据分析流程，也犯过评估上的错。</p>
+              <p class="desc">
+                淘宝用户行为约 1,225 万条：清洗、时段与转化路径、RFM 分层；信用卡欺诈 100 万条、8.74% 正样本：SMOTE + XGBoost；台风强度：KNN；FineBI 看板。
+              </p>
+              <ul class="metrics">
+                <li><strong>1,225 万</strong><em>行为记录</em></li>
+                <li><strong>8.74%</strong><em>欺诈正样本</em></li>
+                <li><strong>0.645</strong><em>台风 R²</em></li>
+              </ul>
+              <p class="limit"><b>局限</b>SMOTE 在划分训练/测试之前做的，99.86% 是在合成测试集上的结果。</p>
+              <span class="read">读完整项目 →</span>
+            </div>
+          </a>
+
+          <!-- 06 -->
+          <a class="project p06 reveal" href="work/06-citic.html">
+            <figure class="mini-fig">
+              <div><span class="big">20</span><span class="unit">days</span></div>
+              <div class="line">POLICY → TECHNOLOGY → MARKET</div>
+            </figure>
+            <div class="card-body">
+              <span class="label">Internship · 2025</span>
+              <h3>中信证券 · 行业研究</h3>
+              <p class="claim">我能在 20 天里，把一个陌生行业讲清楚。</p>
+              <p class="desc">
+                新能源汽车：市场规模、政策、技术、竞争格局；PEST/SWOT；补贴退坡驱动技术内生化；固态电池与智能驾驶。
+              </p>
+              <ul class="metrics">
+                <li><strong>20 天</strong><em>实习</em></li>
+                <li><strong>新能源</strong><em>行业</em></li>
+                <li><strong>1 份</strong><em>行业简报</em></li>
+              </ul>
+              <p class="limit"><b>局限</b>只够搭框架，不够做深度；没有独立完成估值模型。</p>
+              <span class="read">读完整项目 →</span>
+            </div>
+          </a>
+
+          <!-- archive -->
+          <div class="project p07 archive reveal">
+            <span class="label">Archive</span>
+            <h3>其他经历</h3>
+            <ul class="archive-list">
+              <li><span>中国邮政储蓄银行 · 客户服务</span><span>2024</span></li>
+              <li><span>平安银行广州分行 · 市场调研</span><span>2023</span></li>
+              <li><span>国家励志奖学金 ×2</span><span>2023–24</span></li>
+              <li><span>院长奖学金 / 学业优秀奖 / 创业实践奖</span><span>2025</span></li>
+              <li><span>中国国际大学生创新大赛 · 校赛银奖</span><span>2024</span></li>
+              <li><span>“互联网+” · 校铜 / 挑战杯 · 校铜</span><span>2023–24</span></li>
+              <li><span>FRM Level I · FCA · CFA Candidate</span><span>2025</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================== method -->
+    <section id="method" class="section">
+      <div class="wrap method-grid">
+        <div class="method-title reveal">
+          <span class="label">02 / Method</span>
+          <h2>我怎么判断一个项目好不好</h2>
+          <p>不是看收益有多高，是看它能不能被另一个人复现、被另一种设定检验。</p>
+        </div>
+        <ol class="method-list">
+          <li class="reveal">
+            <span class="num">01</span>
+            <div>
+              <h3>数据说清楚了吗</h3>
+              <p>来源、区间、清洗规则、缺失值怎么处理。如果一段数据不能在十分钟内解释清楚，它就不该进入模型。</p>
+            </div>
+          </li>
+          <li class="reveal">
+            <span class="num">02</span>
+            <div>
+              <h3>方法可复现吗</h3>
+              <p>参数、随机种子、代码、运行顺序。结果如果不能被重跑，它就只是一次演示。</p>
+            </div>
+          </li>
+          <li class="reveal">
+            <span class="num">03</span>
+            <div>
+              <h3>结果经得起换设定吗</h3>
+              <p>换基准、换成本、换样本区间，结论还在不在。很多超额收益，只是基准选错了。</p>
+            </div>
+          </li>
+          <li class="reveal">
+            <span class="num">04</span>
+            <div>
+              <h3>局限敢写出来吗</h3>
+              <p>如果不敢，说明我自己也没想清楚。知道一个模型哪里不行，比它跑出多高的收益更重要。</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ================================================== about -->
+    <section id="about" class="section">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="section-no">03</span>
+          <h2>About</h2>
+          <p class="intro">从金融科技到金融工程。我一直在做同一件事：把模糊的问题变成可以计算、可以检验的东西。</p>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-text reveal">
+            <p>我叫陈如意。本科在广东财经大学读金融科技，现在在香港城市大学读金融工程。</p>
+            <p>我做过两份很不一样的工作。在邮储网点，我给大约 400 位客户办过开户、存取款和业务咨询；在拓尔思，我用 Python 处理过千万级的用户行为数据。一端是一个人，一端是一千万条记录。</p>
+            <p>中间是我这几年一直在做的事：把模糊的问题变成可以计算、可以检验的东西。在“穗乐康”，我把一个乡村 IP 的想法做成了三年财务模型；在论文里，我用空间计量检验绿色创新如何影响碳排放；在量化项目里，我把选股的直觉写成了因子、回测和一套能跑的系统。</p>
+            <p>这些项目大多来自课程、实习训练和竞赛。它们不是生产系统，但我尽量按研究的标准要求它们：写清楚数据、方法和局限。</p>
+            <p class="closing">我不认为模型能替代判断。但好的模型，能让判断更便宜。</p>
+          </div>
+
+          <aside class="about-side reveal">
+            <img class="portrait" src="assets/img/portrait.jpg" alt="陈如意的生活照">
+            <ol class="timeline">
+              <li><span class="year">2022.09</span><span>广东财经大学 · 金融科技</span></li>
+              <li><span class="year">2023.01</span><span>平安银行广州分行</span></li>
+              <li><span class="year">2023.09</span><span>穗乐康 · 项目负责人</span></li>
+              <li><span class="year">2024.08</span><span>中国邮政储蓄银行</span></li>
+              <li><span class="year">2025.01</span><span>中信证券 · 行业研究</span></li>
+              <li><span class="year">2025.03</span><span>绿色技术创新论文 · 第二作者</span></li>
+              <li><span class="year">2025.06</span><span>拓尔思 · 数据分析</span></li>
+              <li><span class="year">2026.09</span><span>香港城市大学 · 金融工程</span></li>
+              <li><span class="year">2027</span><span>毕业</span></li>
+            </ol>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================== contact -->
+    <section id="contact" class="contact">
+      <div class="wrap">
+        <span class="label reveal">04 / Contact</span>
+        <h2 class="reveal">如果你在找量化研究、金融科技<br>或数据分析方向的人，欢迎写信给我。</h2>
+        <a class="email reveal" href="mailto:chen_ruyi17@163.com">chen_ruyi17@163.com</a>
+        <div class="meta reveal">
+          <span>香港 · 深圳 · 广州</span>
+          <span>2027 届</span>
+          <span>中文 / English</span>
+          <span><a href="assets/cv/chen-ruyi-cv.pdf" target="_blank" rel="noopener">下载 CV ↗</a></span>
+          <span><a href="code.html">代码与数据 ↗</a></span>
+        </div>
+        <p class="limit" style="max-width:34em;margin-top:32px;border-top:0;padding-top:0;">
+          CV 与完整代码可邮件索取。面试需要时，我会回复一个私有仓库链接。
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="inner">
+      <span>陈如意 / Ruyi Chen</span>
+      <span>Last updated 2026.11</span>
+      <span>Hong Kong · Shenzhen · Guangzhou</span>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

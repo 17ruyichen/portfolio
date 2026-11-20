@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>多因子量化策略 — 陈如意</title>
+  <meta name="description" content="A 股多因子策略：TTM EPS、财报滞后、全市场基准、换手成本与样本外检验。">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <a class="skip" href="#main">跳到正文</a>
+  <header class="site-header">
+    <div class="inner">
+      <a class="brand" href="../index.html">陈如意 <span>/ Ruyi Chen</span></a>
+      <nav class="nav" aria-label="主导航">
+        <a href="../index.html#work">Work</a>
+        <a href="../index.html#method">Method</a>
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#contact">Contact</a>
+        <a class="cv" href="../assets/cv/chen-ruyi-cv.pdf" target="_blank" rel="noopener">CV</a>
+        <a class="cv" href="../code.html">Code</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="wrap detail-hero">
+      <a class="back" href="../index.html#work">← 返回项目</a>
+      <span class="label">Course project · 2025 — rebuilt 2026</span>
+      <h1>多因子量化策略</h1>
+      <p class="sub">Multi-Factor Equity Strategy</p>
+      <p class="claim">我把“买便宜的好公司”拆成了三个可以排序的因子。</p>
+    </section>
+
+    <div class="wrap detail-layout">
+      <aside class="aside">
+        <div class="aside-item"><span class="label">角色</span><p>课程个人报告<br>基于三人小组作业<br>2026.11 重跑</p></div>
+        <div class="aside-item"><span class="label">期间</span><p>2025.03 – 2025.07</p></div>
+        <div class="aside-item"><span class="label">数据</span><p>A 股月频 2005–2024<br>718,305 条观测<br>5,756 只股票</p></div>
+        <div class="aside-item"><span class="label">工具</span><p>Python · pandas<br>matplotlib</p></div>
+        <div class="aside-item"><span class="label">代码</span><p>可应要求提供</p></div>
+      </aside>
+
+      <div class="body">
+        <section>
+          <h2><span>01 / Question</span>跨板块的 PE 不可比，能不能在板块内部排序？</h2>
+          <p>银行的 8 倍 PE 和科技的 50 倍 PE，放在一张表里没有意义。这个项目想做的，是在同一板块内，用价值、成长、质量三个维度给股票排序，再把它们合成一个分数。</p>
+          <p>课程版的报告写的是年化 40.23%。重跑时我先问了一个更基本的问题：把基准换成全市场、把成本算全，这个超额还在吗？</p>
+        </section>
+
+        <section>
+          <h2><span>02 / Data</span>718,305 条月度观测，2005–2024</h2>
+          <p>数据来自课程提供的 A 股月频表：个股月回报率、每股指标、成长能力、总市值。财务数据是季度频率，2005-03 至 2023-12。</p>
+          <ul>
+            <li>EPS 是年初至今累计值，先还原成 TTM，再计算 PE。</li>
+            <li>财报不是期末就可见：按法定披露截止日设置可用日，避免前视偏差。</li>
+            <li>每月末取最近一期已经可见的财报，用 <span class="mono">merge_asof(backward)</span> 对齐。</li>
+          </ul>
+          <p>数据限制：价格是前复权收盘价，EPS 是名义值；两者相除的 PE 水平可能有偏。这一点无法在现有数据内完全修正，只能写进局限。</p>
+        </section>
+
+        <section>
+          <h2><span>03 / Method</span>三个因子，一套成本口径</h2>
+          <p>价值用 PE，成长用归母净利润增长率，质量用总负债增长率。每月在可选池内做横截面百分位排序，按 40/40/20 加权。分数越高，越靠前。</p>
+          <pre class="code"><span class="c"># percentile ranks within each month, eligible names only</span>
+df[<span class="k">"s_value"</span>]   = g[<span class="k">"PE"</span>].rank(pct=<span class="k">True</span>, ascending=<span class="k">False</span>)
+df[<span class="k">"s_growth"</span>]  = g[<span class="k">"Niapcrt"</span>].rank(pct=<span class="k">True</span>, ascending=<span class="k">True</span>)
+df[<span class="k">"s_quality"</span>] = g[<span class="k">"Lbrt"</span>].rank(pct=<span class="k">True</span>, ascending=<span class="k">False</span>)
+df[<span class="k">"score"</span>] = <span class="k">0.4</span>*s_value + <span class="k">0.4</span>*s_growth + <span class="k">0.2</span>*s_quality</pre>
+          <ul>
+            <li>可选池：PE 在 (0, 300)、三项因子非缺失、至少 6 个月交易历史、剔除当月市值最低 30%。</li>
+            <li>组合：全市场前 10%，最多 150 只，等权，月度调仓。</li>
+            <li>成本：按换手率计算，佣金 0.03% + 滑点 0.10% + 印花税（2023-08 前 0.10%，后 0.05%），仅卖出收印花税。</li>
+            <li>基准：全市场等权；市值加权作为稳健性检验。</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2><span>04 / Result</span>年化 8.06%，超额很薄</h2>
+          <table class="metric-table">
+            <thead>
+              <tr><th>区间</th><th class="num">策略（净）</th><th class="num">全市场等权</th><th class="num">市值加权</th><th class="num">vs 等权</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>全样本 2005–2024</td><td class="num">8.06%</td><td class="num">7.19%</td><td class="num">4.81%</td><td class="num">+0.87%</td></tr>
+              <tr><td>样本内 2005–2018</td><td class="num">7.52%</td><td class="num">5.79%</td><td class="num">3.11%</td><td class="num">+1.72%</td></tr>
+              <tr><td>样本外 2019–2024</td><td class="num">9.15%</td><td class="num">10.05%</td><td class="num">8.31%</td><td class="num">−0.90%</td></tr>
+            </tbody>
+          </table>
+          <p>IC 均值 0.022，ICIR 0.206，t 值 3.01；五分组月均收益从 Q1 的 0.59% 单调升到 Q5 的 1.15%。月均换手 19.9%，平均持仓 81 只。</p>
+
+          <figure class="figure">
+            <img src="../assets/img/01-cumulative.png" alt="多因子策略与全市场等权基准的累计净值曲线">
+            <figcaption>策略（净）与全市场等权，2005–2024。虚线右侧为 2019 年后的样本外区间。</figcaption>
+          </figure>
+
+          <div class="note">
+            <span class="label">Rebuild note</span>
+            <p>课程版报告写的是 40.23%。这个数字来自一个基准错误：代码把“组合内股票的等权平均”当成了市场基准，成本只计 0.03% 佣金，绩效指标用的是税前收益，EPS 也没有还原成 TTM。</p>
+            <p>重跑后是 8.06%。这不是失败——它说明这个策略更接近“质量+价值的结构性倾斜”，而不是稳定的 alpha。完整对照在代码仓库的 README 里。</p>
+          </div>
+
+          <figure class="figure grid-2">
+            <img src="../assets/img/01-quintiles.png" alt="按综合因子得分分五组的月均收益柱状图">
+            <img src="../assets/img/01-ic.png" alt="月度 Rank IC 与 12 个月滚动均值">
+            <figcaption>左：按综合得分分五组，月均收益单调。右：月度 Rank IC 与 12 个月滚动均值。</figcaption>
+          </figure>
+        </section>
+
+        <section>
+          <h2><span>05 / Limitation</span>四个没有解决的口径问题</h2>
+          <ul>
+            <li><strong>价格口径。</strong>前复权收盘价与名义 EPS 相除，PE 水平可能有偏；没有未复权价格，无法完全修正。</li>
+            <li><strong>行业。</strong>数据没有行业分类，只能用上市板块（主板/中小板/创业板/科创板）代替。</li>
+            <li><strong>退市。</strong>没有退市收益；下月收益缺失的股票被排除，可能低估尾部损失。</li>
+            <li><strong>ST 与幸存者偏差。</strong>没有股票名称，无法剔除 ST；数据是否包含已退市股票无法确认。</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2><span>06 / Next</span>如果再做一次</h2>
+          <ul>
+            <li>换中证全指或真实行业指数做基准，补真实行业分类。</li>
+            <li>做因子正交化与行业中性，看价值、成长、质量各自还剩多少。</li>
+            <li>补退市收益、剔除 ST，重估尾部风险。</li>
+            <li>做换手成本敏感性与容量分析，回答“这个策略能装多少钱”。</li>
+          </ul>
+        </section>
+
+        <div class="next-project">
+          <span class="label">Next project</span>
+          <a href="02-system.html"><span>量化分析系统</span><span class="arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="inner">
+      <span>陈如意 / Ruyi Chen</span>
+      <span>Last updated 2026.11</span>
+      <span>Hong Kong · Shenzhen · Guangzhou</span>
+    </div>
+  </footer>
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

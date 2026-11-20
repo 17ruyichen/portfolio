@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>绿色技术创新与区域碳排放 — 陈如意</title>
+  <meta name="description" content="30 个省份 2017–2021 面板：空间计量、中介效应与区域异质性。第二作者。">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <a class="skip" href="#main">跳到正文</a>
+  <header class="site-header">
+    <div class="inner">
+      <a class="brand" href="../index.html">陈如意 <span>/ Ruyi Chen</span></a>
+      <nav class="nav" aria-label="主导航">
+        <a href="../index.html#work">Work</a>
+        <a href="../index.html#method">Method</a>
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#contact">Contact</a>
+        <a class="cv" href="../assets/cv/chen-ruyi-cv.pdf" target="_blank" rel="noopener">CV</a>
+        <a class="cv" href="../code.html">Code</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="wrap detail-hero">
+      <a class="back" href="../index.html#work">← 返回项目</a>
+      <span class="label">Research · 2025</span>
+      <h1>绿色技术创新与区域碳排放</h1>
+      <p class="sub">Green Innovation and Regional Carbon Emissions · 第二作者</p>
+      <p class="claim">我负责的那部分，让我第一次遇到“结果不听话”。</p>
+    </section>
+
+    <div class="wrap detail-layout">
+      <aside class="aside">
+        <div class="aside-item"><span class="label">角色</span><p>第二作者（5 人）<br>数据、空间权重矩阵<br>SAR/SEM 估计</p></div>
+        <div class="aside-item"><span class="label">期间</span><p>2025.03 – 2025.10</p></div>
+        <div class="aside-item"><span class="label">样本</span><p>30 个省份<br>2017–2021</p></div>
+        <div class="aside-item"><span class="label">工具</span><p>Python · Stata</p></div>
+        <div class="aside-item"><span class="label">全文</span><p>可应要求提供</p></div>
+      </aside>
+
+      <div class="body">
+        <section>
+          <h2><span>01 / Question</span>绿色创新是通过 TFP 影响碳排放的吗？</h2>
+          <p>这个项目想回答两个问题。第一，绿色技术创新是否通过提升全要素生产率（TFP）间接降低碳排放；第二，这种影响是否存在空间溢出——一个省份的绿色技术，会不会影响邻近省份的碳排放。</p>
+          <p>第二个问题是我负责的部分。它也是整篇论文里最不听话的部分。</p>
+        </section>
+
+        <section>
+          <h2><span>02 / Data</span>30 个省份，2017–2021</h2>
+          <p>样本为中国 30 个省（自治区、直辖市），剔除数据缺失严重的西藏，以及港澳台。数据来自国家统计局、中国深度数据库与《中国能源统计年鉴》。</p>
+          <ul>
+            <li>被解释变量：二氧化碳排放强度。</li>
+            <li>核心解释变量：专利申请数（取对数），作为绿色技术创新的代理。</li>
+            <li>中介变量：全要素生产率，用 DEA-Malmquist 测算；投入为就业人数、固定资产投资、电力消费，产出为 GDP 与二氧化碳排放。</li>
+            <li>控制变量：煤炭占比、人均 GDP、第二产业增加量。</li>
+            <li>空间权重矩阵：地理距离的倒数。</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2><span>03 / Method</span>从基准回归到空间模型</h2>
+          <p>先用省份固定效应做基准回归，再用逐步法检验 TFP 的中介效应。空间部分先做 Moran's I，确认是否存在空间自相关；再比较 SAR 与 SEM，按空间项的显著性与拟合优度选择模型；最后分东、中、西做异质性检验。</p>
+          <p>我负责数据清洗、空间权重矩阵构建、SAR/SEM 估计与稳健性检验。论文署名第二作者。</p>
+        </section>
+
+        <section>
+          <h2><span>04 / Result</span>结论对设定很敏感</h2>
+          <table class="metric-table">
+            <thead>
+              <tr><th>模型</th><th class="num">绿色创新</th><th class="num">空间项</th><th>读法</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>基准 FE（加控制）</td><td class="num">−2.081**</td><td class="num">—</td><td>5% 显著</td></tr>
+              <tr><td>标准化基准</td><td class="num">−0.5151</td><td class="num">—</td><td>p=0.395，不显著</td></tr>
+              <tr><td>SEM</td><td class="num">−0.564***</td><td class="num">−2.462 (1.824)</td><td>空间项不显著</td></tr>
+              <tr><td>SAR</td><td class="num">−0.506**</td><td class="num">−0.312 (1.384)</td><td>空间项不显著</td></tr>
+            </tbody>
+          </table>
+          <p>括号内为标准误。核心解释变量在多数设定下为负，但空间项本身都不显著。这意味着：<strong>可以说绿色创新与碳强度存在负相关，但不能说存在显著的空间溢出。</strong></p>
+          <p>Moran's I 也支持这个谨慎的读法：2017–2019 年显著为正，2020 年后转负且不显著。</p>
+
+          <figure class="figure">
+            <img src="../assets/img/03-moran.png" alt="2017–2021 年碳排放强度的 Moran's I 时间演化">
+            <figcaption>碳排放强度的 Moran's I：2017–2019 显著，2020 年后不显著。2020 年的结构变化很可能与疫情有关。</figcaption>
+          </figure>
+
+          <figure class="figure">
+            <img src="../assets/img/03-hetero.png" alt="东、中、西三大区域的绿色创新与 TFP 系数">
+            <figcaption>区域异质性：东部绿色创新显著为负，西部 TFP 显著为负；中部两者都不显著。填充表示 p &lt; 0.05。</figcaption>
+          </figure>
+
+          <figure class="figure map">
+            <img src="../assets/img/03-map.png" alt="中国各省碳排放强度的空间分布">
+            <figcaption>碳排放强度的省级分布。空间集聚在 2017–2019 年可见，2020 年后减弱。</figcaption>
+          </figure>
+
+          <div class="note">
+            <span class="label">What I learned</span>
+            <p>我原本以为“空间溢出”会是一个漂亮的结论。跑完之后发现，空间项不显著，而且结论对变量标准化与模型设定很敏感。这让我第一次意识到：显著性不是结论，稳健性才是。</p>
+            <p>如果重写，我会把这篇论文的核心变成一个负面结果：<em>在省级面板上，绿色创新的空间溢出并不稳健。</em> 这比硬写一个显著结论更有价值。</p>
+          </div>
+        </section>
+
+        <section>
+          <h2><span>05 / Limitation</span>四个限制</h2>
+          <ul>
+            <li><strong>空间溢出没有得到稳健支持。</strong>SAR 与 SEM 的空间项都不显著，论文里“存在空间溢出”的表述应该降级为“存在空间关联的迹象”。</li>
+            <li><strong>结论对设定敏感。</strong>基准回归在加控制变量后为 −2.081（5% 显著），换成标准化变量后为 −0.5151（p=0.395）。</li>
+            <li><strong>中介效应在 10% 水平。</strong>不是 5%。</li>
+            <li><strong>2020 年的结构变化。</strong>疫情冲击可能改变了空间模式，五年样本不足以区分结构性变化与短期冲击。</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2><span>06 / Next</span>如果再做一次</h2>
+          <ul>
+            <li>换几种空间权重矩阵（经济距离、邻接、嵌套），看空间项是否稳健。</li>
+            <li>做安慰剂检验与随机置换，排除偶然显著。</li>
+            <li>用更细的绿色专利分类，区分光伏、氢能、碳捕捉。</li>
+            <li>如果结果仍不稳健，就把它写成一篇负面结果短文。</li>
+          </ul>
+        </section>
+
+        <div class="next-project">
+          <span class="label">Next project</span>
+          <a href="04-suilekang.html"><span>穗乐康 · 乡村 IP 打造平台</span><span class="arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="inner">
+      <span>陈如意 / Ruyi Chen</span>
+      <span>Last updated 2026.11</span>
+      <span>Hong Kong · Shenzhen · Guangzhou</span>
+    </div>
+  </footer>
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>
